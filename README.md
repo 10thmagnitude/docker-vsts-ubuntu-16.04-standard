@@ -1,0 +1,1 @@
+This is an image deived from a Ubuntu 16.04 VSTS agent, with standard build tools added.
