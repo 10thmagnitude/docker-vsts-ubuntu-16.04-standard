@@ -1,4 +1,4 @@
-FROM 10thmagnitude/ubuntu-16.04
+FROM quay.io/10thmagnitude/vsts-agent-ubuntu-16.04
 
 # Install basic command-line utilities
 RUN apt-get update \
