@@ -76,13 +76,13 @@ RUN curl -sL https://cmake.org/files/v3.10/cmake-3.10.2-Linux-x86_64.sh -o cmake
  && ./cmake.sh --prefix=/usr/local --exclude-subdir \
  && rm cmake.sh
 
-# # Install Erlang
-# RUN echo "deb http://binaries.erlang-solutions.com/debian xenial contrib" > /etc/apt/sources.list.d/eslerlang.list \
-#  && wget -O - http://binaries.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add - \
-#  && apt-get update \
-#  && apt-get install -y --no-install-recommends esl-erlang \
-#  && rm -rf /var/lib/apt/lists/* \
-#  && rm -rf /etc/apt/sources.list.d/*
+# Install Erlang
+RUN echo "deb http://binaries.erlang-solutions.com/debian xenial contrib" > /etc/apt/sources.list.d/eslerlang.list \
+ && wget -O - http://binaries.erlang-solutions.com/debian/erlang_solutions.asc | apt-key add - \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends esl-erlang \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /etc/apt/sources.list.d/*
 
 # Install Firefox
 RUN apt-get update \
@@ -112,95 +112,95 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
  && rm -rf /etc/apt/sources.list.d/*
 ENV CHROME_BIN /usr/bin/google-chrome
 
-# # Install Haskell
-# RUN apt-get update \
-#  && apt-get install -y haskell-platform \
-#  && rm -rf /var/lib/apt/lists/*
+# Install Haskell
+RUN apt-get update \
+ && apt-get install -y haskell-platform \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install Helm
 RUN curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash
 
-# # Install Heroku CLI
-# RUN curl https://cli-assets.heroku.com/install.sh | sh
+# Install Heroku CLI
+RUN curl https://cli-assets.heroku.com/install.sh | sh
 
-# # Install HHVM
-# RUN apt-get update \
-#  && apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94 \
-#  && add-apt-repository https://dl.hhvm.com/ubuntu \
-#  && apt-get update \
-#  && apt-get install -y hhvm \
-#  && rm -rf /var/lib/apt/lists/* \
-#  && rm -rf /etc/apt/sources.list.d/*
+# Install HHVM
+RUN apt-get update \
+ && apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xB4112585D386EB94 \
+ && add-apt-repository https://dl.hhvm.com/ubuntu \
+ && apt-get update \
+ && apt-get install -y hhvm \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /etc/apt/sources.list.d/*
 
-# # Install ImageMagick
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends --fix-missing \
-#     imagemagick \
-#     libmagickcore-dev \
-#     libmagickwand-dev \
-#     libmagic-dev \
-#  && rm -rf /var/lib/apt/lists/*
+# Install ImageMagick
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends --fix-missing \
+    imagemagick \
+    libmagickcore-dev \
+    libmagickwand-dev \
+    libmagic-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# # Install Java OpenJDKs
-# RUN apt-add-repository -y ppa:openjdk-r/ppa
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openjdk-7-jdk \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openjdk-8-jdk \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openjdk-9-jdk \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openjdk-10-jdk \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends openjdk-11-jdk \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-# ENV JAVA_HOME_7_X64=/usr/lib/jvm/java-7-openjdk-amd64 \
-#     JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64 \
-#     JAVA_HOME_9_X64=/usr/lib/jvm/java-9-openjdk-amd64 \
-#     JAVA_HOME_10_X64=/usr/lib/jvm/java-10-openjdk-amd64 \
-#     JAVA_HOME_11_X64=/usr/lib/jvm/java-11-openjdk-amd64 \
-#     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
-#     JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+# Install Java OpenJDKs
+RUN apt-add-repository -y ppa:openjdk-r/ppa
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-7-jdk \
+ && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-8-jdk \
+ && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-9-jdk \
+ && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-10-jdk \
+ && rm -rf /var/lib/apt/lists/*
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends openjdk-11-jdk \
+ && rm -rf /var/lib/apt/lists/*
+RUN update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+ENV JAVA_HOME_7_X64=/usr/lib/jvm/java-7-openjdk-amd64 \
+    JAVA_HOME_8_X64=/usr/lib/jvm/java-8-openjdk-amd64 \
+    JAVA_HOME_9_X64=/usr/lib/jvm/java-9-openjdk-amd64 \
+    JAVA_HOME_10_X64=/usr/lib/jvm/java-10-openjdk-amd64 \
+    JAVA_HOME_11_X64=/usr/lib/jvm/java-11-openjdk-amd64 \
+    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
+    JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
 
-# # Install Java Tools (Ant, Gradle, Maven)
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends \
-#     ant \
-#     ant-optional \
-#  && rm -rf /var/lib/apt/lists/*
-# RUN curl -sL https://services.gradle.org/distributions/gradle-4.6-bin.zip -o gradle-4.6.zip \
-#  && unzip -d /usr/share gradle-4.6.zip \
-#  && ln -s /usr/share/gradle-4.6/bin/gradle /usr/bin/gradle \
-#  && rm gradle-4.6.zip
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends \
-#     maven \
-#  && rm -rf /var/lib/apt/lists/*
-# ENV ANT_HOME=/usr/share/ant \
-#     GRADLE_HOME=/usr/share/gradle \
-#     M2_HOME=/usr/share/maven
+# Install Java Tools (Ant, Gradle, Maven)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    ant \
+    ant-optional \
+ && rm -rf /var/lib/apt/lists/*
+RUN curl -sL https://services.gradle.org/distributions/gradle-4.6-bin.zip -o gradle-4.6.zip \
+ && unzip -d /usr/share gradle-4.6.zip \
+ && ln -s /usr/share/gradle-4.6/bin/gradle /usr/bin/gradle \
+ && rm gradle-4.6.zip
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    maven \
+ && rm -rf /var/lib/apt/lists/*
+ENV ANT_HOME=/usr/share/ant \
+    GRADLE_HOME=/usr/share/gradle \
+    M2_HOME=/usr/share/maven
 
 # Install kubectl
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl \
  && chmod +x ./kubectl \
  && mv ./kubectl /usr/local/bin/kubectl
 
-# # Install Mercurial
-# RUN apt-get update \
-#   && apt-get install -y mercurial \
-#   && rm -rf /var/lib/apt/lists/*
+# Install Mercurial
+RUN apt-get update \
+  && apt-get install -y mercurial \
+  && rm -rf /var/lib/apt/lists/*
 
-# # Install Miniconda
-# RUN curl -sL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh \
-#  && chmod +x miniconda.sh \
-#  && ./miniconda.sh -b -p /usr/share/miniconda \
-#  && rm miniconda.sh
-# ENV CONDA=/usr/share/miniconda
+# Install Miniconda
+RUN curl -sL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o miniconda.sh \
+ && chmod +x miniconda.sh \
+ && ./miniconda.sh -b -p /usr/share/miniconda \
+ && rm miniconda.sh
+ENV CONDA=/usr/share/miniconda
 
 # Install Mono
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
@@ -221,19 +221,19 @@ RUN [ "xenial" = "xenial" ] \
   || echo -n
 ENV PATH=$PATH:/opt/mssql-tools/bin
 
-# # Install MySQL Client
-# RUN apt-get update \
-#   && apt-get install -y mysql-client \
-#   && rm -rf /var/lib/apt/lists/*
-# ENV mysql=/usr/bin/mysql
+# Install MySQL Client
+RUN apt-get update \
+  && apt-get install -y mysql-client \
+  && rm -rf /var/lib/apt/lists/*
+ENV mysql=/usr/bin/mysql
 
-# # Install MySQL Server
-# ENV MYSQL_ROOT_PASSWORD=
-# RUN bash -c 'debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"'
-# RUN bash -c 'debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"'
-# RUN apt-get update \
-#   && apt-get install -y mysql-server \
-#   && rm -rf /var/lib/apt/lists/*
+# Install MySQL Server
+ENV MYSQL_ROOT_PASSWORD=
+RUN bash -c 'debconf-set-selections <<< "mysql-server mysql-server/root_password password $MYSQL_ROOT_PASSWORD"'
+RUN bash -c 'debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $MYSQL_ROOT_PASSWORD"'
+RUN apt-get update \
+  && apt-get install -y mysql-server \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install .NET Core SDK and initialize package cache
 RUN curl https://packages.microsoft.com/config/ubuntu/16.04/packages-microsoft-prod.deb > packages-microsoft-prod.deb \
@@ -280,253 +280,253 @@ RUN apt-get update \
  && mv $PHANTOM_JS /usr/local/share \
  && ln -sf /usr/local/share/$PHANTOM_JS/bin/phantomjs /usr/local/bin
 
-# # Install PHP versions and libraries
-# RUN apt-add-repository ppa:ondrej/php -y \
-#  && apt-get update \
-#  && apt-get install -y --no-install-recommends \
-#     php5.6 \
-#     php5.6-amqp \
-#     php5.6-bcmath \
-#     php5.6-bz2 \
-#     php5.6-cgi \
-#     php5.6-cli \
-#     php5.6-common \
-#     php5.6-curl \
-#     php5.6-dba \
-#     php5.6-dev \
-#     php5.6-enchant \
-#     php5.6-fpm \
-#     php5.6-gd \
-#     php5.6-gmp \
-#     php5.6-imap \
-#     php5.6-interbase \
-#     php5.6-intl \
-#     php5.6-json \
-#     php5.6-ldap \
-#     php5.6-mbstring \
-#     php5.6-mcrypt \
-#     php5.6-mysql \
-#     php5.6-odbc \
-#     php5.6-opcache \
-#     php5.6-pgsql \
-#     php5.6-phpdbg \
-#     php5.6-pspell \
-#     php5.6-readline \
-#     php5.6-recode \
-#     php5.6-snmp \
-#     php5.6-soap \
-#     php5.6-sqlite3 \
-#     php5.6-sybase \
-#     php5.6-tidy \
-#     php5.6-xml \
-#     php5.6-xmlrpc \
-#     php5.6-xsl \
-#     php5.6-zip \
-#  && apt-get remove --purge -yq php5.6-dev \
-#  && apt-get install -y --no-install-recommends \
-#     php7.0 \
-#     php7.0-amqp \
-#     php7.0-bcmath \
-#     php7.0-bz2 \
-#     php7.0-cgi \
-#     php7.0-cli \
-#     php7.0-common \
-#     php7.0-curl \
-#     php7.0-dba \
-#     php7.0-dev \
-#     php7.0-enchant \
-#     php7.0-fpm \
-#     php7.0-gd \
-#     php7.0-gmp \
-#     php7.0-imap \
-#     php7.0-interbase \
-#     php7.0-intl \
-#     php7.0-json \
-#     php7.0-ldap \
-#     php7.0-mbstring \
-#     php7.0-mcrypt \
-#     php7.0-mysql \
-#     php7.0-odbc \
-#     php7.0-opcache \
-#     php7.0-pgsql \
-#     php7.0-phpdbg \
-#     php7.0-pspell \
-#     php7.0-readline \
-#     php7.0-recode \
-#     php7.0-snmp \
-#     php7.0-soap \
-#     php7.0-sqlite3 \
-#     php7.0-sybase \
-#     php7.0-tidy \
-#     php7.0-xml \
-#     php7.0-xmlrpc \
-#     php7.0-xsl \
-#     php7.0-zip \
-#  && apt-get remove --purge -yq php7.0-dev \
-#  && apt-get install -y --no-install-recommends \
-#     php7.1 \
-#     php7.1-amqp \
-#     php7.1-bcmath \
-#     php7.1-bz2 \
-#     php7.1-cgi \
-#     php7.1-cli \
-#     php7.1-common \
-#     php7.1-curl \
-#     php7.1-dba \
-#     php7.1-dev \
-#     php7.1-enchant \
-#     php7.1-fpm \
-#     php7.1-gd \
-#     php7.1-gmp \
-#     php7.1-imap \
-#     php7.1-interbase \
-#     php7.1-intl \
-#     php7.1-json \
-#     php7.1-ldap \
-#     php7.1-mbstring \
-#     php7.1-mcrypt \
-#     php7.1-mysql \
-#     php7.1-odbc \
-#     php7.1-opcache \
-#     php7.1-pgsql \
-#     php7.1-phpdbg \
-#     php7.1-pspell \
-#     php7.1-readline \
-#     php7.1-recode \
-#     php7.1-snmp \
-#     php7.1-soap \
-#     php7.1-sqlite3 \
-#     php7.1-sybase \
-#     php7.1-tidy \
-#     php7.1-xml \
-#     php7.1-xmlrpc \
-#     php7.1-xsl \
-#     php7.1-zip \
-#  && apt-get remove --purge -yq php7.1-dev \
-#  && apt-get install -y --no-install-recommends \
-#     php7.2 \
-#     php7.2-apcu \
-#     php7.2-amqp \
-#     php7.2-bcmath \
-#     php7.2-bz2 \
-#     php7.2-cgi \
-#     php7.2-cli \
-#     php7.2-common \
-#     php7.2-curl \
-#     php7.2-dba \
-#     php7.2-dev \
-#     php7.2-enchant \
-#     php7.2-fpm \
-#     php7.2-gd \
-#     php7.2-gmp \
-#     php7.2-imap \
-#     php7.2-interbase \
-#     php7.2-intl \
-#     php7.2-json \
-#     php7.2-ldap \
-#     php7.2-mbstring \
-#     php7.2-mysql \
-#     php7.2-odbc \
-#     php7.2-opcache \
-#     php7.2-pgsql \
-#     php7.2-phpdbg \
-#     php7.2-pspell \
-#     php7.2-readline \
-#     php7.2-recode \
-#     php7.2-snmp \
-#     php7.2-soap \
-#     php7.2-sqlite3 \
-#     php7.2-sybase \
-#     php7.2-tidy \
-#     php7.2-xml \
-#     php7.2-xmlrpc \
-#     php7.2-xsl \
-#     php7.2-zip \
-#  && apt-get install -y --no-install-recommends \
-#     php-igbinary \
-#     php-memcache \
-#     php-memcached \
-#     php-mongodb \
-#     php-redis \
-#     php-xdebug \
-#     php-yaml \
-#     php-zmq \
-#  && apt-get remove --purge -yq php7.2-dev \
-#  && apt-get install -y --no-install-recommends snmp \
-#  && rm -rf /var/lib/apt/lists/*
+# Install PHP versions and libraries
+RUN apt-add-repository ppa:ondrej/php -y \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+    php5.6 \
+    php5.6-amqp \
+    php5.6-bcmath \
+    php5.6-bz2 \
+    php5.6-cgi \
+    php5.6-cli \
+    php5.6-common \
+    php5.6-curl \
+    php5.6-dba \
+    php5.6-dev \
+    php5.6-enchant \
+    php5.6-fpm \
+    php5.6-gd \
+    php5.6-gmp \
+    php5.6-imap \
+    php5.6-interbase \
+    php5.6-intl \
+    php5.6-json \
+    php5.6-ldap \
+    php5.6-mbstring \
+    php5.6-mcrypt \
+    php5.6-mysql \
+    php5.6-odbc \
+    php5.6-opcache \
+    php5.6-pgsql \
+    php5.6-phpdbg \
+    php5.6-pspell \
+    php5.6-readline \
+    php5.6-recode \
+    php5.6-snmp \
+    php5.6-soap \
+    php5.6-sqlite3 \
+    php5.6-sybase \
+    php5.6-tidy \
+    php5.6-xml \
+    php5.6-xmlrpc \
+    php5.6-xsl \
+    php5.6-zip \
+ && apt-get remove --purge -yq php5.6-dev \
+ && apt-get install -y --no-install-recommends \
+    php7.0 \
+    php7.0-amqp \
+    php7.0-bcmath \
+    php7.0-bz2 \
+    php7.0-cgi \
+    php7.0-cli \
+    php7.0-common \
+    php7.0-curl \
+    php7.0-dba \
+    php7.0-dev \
+    php7.0-enchant \
+    php7.0-fpm \
+    php7.0-gd \
+    php7.0-gmp \
+    php7.0-imap \
+    php7.0-interbase \
+    php7.0-intl \
+    php7.0-json \
+    php7.0-ldap \
+    php7.0-mbstring \
+    php7.0-mcrypt \
+    php7.0-mysql \
+    php7.0-odbc \
+    php7.0-opcache \
+    php7.0-pgsql \
+    php7.0-phpdbg \
+    php7.0-pspell \
+    php7.0-readline \
+    php7.0-recode \
+    php7.0-snmp \
+    php7.0-soap \
+    php7.0-sqlite3 \
+    php7.0-sybase \
+    php7.0-tidy \
+    php7.0-xml \
+    php7.0-xmlrpc \
+    php7.0-xsl \
+    php7.0-zip \
+ && apt-get remove --purge -yq php7.0-dev \
+ && apt-get install -y --no-install-recommends \
+    php7.1 \
+    php7.1-amqp \
+    php7.1-bcmath \
+    php7.1-bz2 \
+    php7.1-cgi \
+    php7.1-cli \
+    php7.1-common \
+    php7.1-curl \
+    php7.1-dba \
+    php7.1-dev \
+    php7.1-enchant \
+    php7.1-fpm \
+    php7.1-gd \
+    php7.1-gmp \
+    php7.1-imap \
+    php7.1-interbase \
+    php7.1-intl \
+    php7.1-json \
+    php7.1-ldap \
+    php7.1-mbstring \
+    php7.1-mcrypt \
+    php7.1-mysql \
+    php7.1-odbc \
+    php7.1-opcache \
+    php7.1-pgsql \
+    php7.1-phpdbg \
+    php7.1-pspell \
+    php7.1-readline \
+    php7.1-recode \
+    php7.1-snmp \
+    php7.1-soap \
+    php7.1-sqlite3 \
+    php7.1-sybase \
+    php7.1-tidy \
+    php7.1-xml \
+    php7.1-xmlrpc \
+    php7.1-xsl \
+    php7.1-zip \
+ && apt-get remove --purge -yq php7.1-dev \
+ && apt-get install -y --no-install-recommends \
+    php7.2 \
+    php7.2-apcu \
+    php7.2-amqp \
+    php7.2-bcmath \
+    php7.2-bz2 \
+    php7.2-cgi \
+    php7.2-cli \
+    php7.2-common \
+    php7.2-curl \
+    php7.2-dba \
+    php7.2-dev \
+    php7.2-enchant \
+    php7.2-fpm \
+    php7.2-gd \
+    php7.2-gmp \
+    php7.2-imap \
+    php7.2-interbase \
+    php7.2-intl \
+    php7.2-json \
+    php7.2-ldap \
+    php7.2-mbstring \
+    php7.2-mysql \
+    php7.2-odbc \
+    php7.2-opcache \
+    php7.2-pgsql \
+    php7.2-phpdbg \
+    php7.2-pspell \
+    php7.2-readline \
+    php7.2-recode \
+    php7.2-snmp \
+    php7.2-soap \
+    php7.2-sqlite3 \
+    php7.2-sybase \
+    php7.2-tidy \
+    php7.2-xml \
+    php7.2-xmlrpc \
+    php7.2-xsl \
+    php7.2-zip \
+ && apt-get install -y --no-install-recommends \
+    php-igbinary \
+    php-memcache \
+    php-memcached \
+    php-mongodb \
+    php-redis \
+    php-xdebug \
+    php-yaml \
+    php-zmq \
+ && apt-get remove --purge -yq php7.2-dev \
+ && apt-get install -y --no-install-recommends snmp \
+ && rm -rf /var/lib/apt/lists/*
 
-# # Install composer (for PHP)
-# COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-# ENV COMPOSER_ALLOW_SUPERUSER=1
+# Install composer (for PHP)
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
 
-# # Install phpunit (for PHP)
-# RUN wget -q -O phpunit https://phar.phpunit.de/phpunit-7.phar \
-#  && chmod +x phpunit \
-#  && mv phpunit /usr/local/bin/phpunit
+# Install phpunit (for PHP)
+RUN wget -q -O phpunit https://phar.phpunit.de/phpunit-7.phar \
+ && chmod +x phpunit \
+ && mv phpunit /usr/local/bin/phpunit
 
-# # Install Pollinate
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends pollinate \
-#  && rm -rf /var/lib/apt/lists/*
+# Install Pollinate
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends pollinate \
+ && rm -rf /var/lib/apt/lists/*
 
-# # Install Powershell Core
-# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-#  && curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/microsoft.list \
-#  && apt-get update \
-#  && apt-get install -y --no-install-recommends \
-#     powershell \
-#  && rm -rf /var/lib/apt/lists/* \
-#  && rm -rf /etc/apt/sources.list.d/*
+# Install Powershell Core
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
+ && curl https://packages.microsoft.com/config/ubuntu/16.04/prod.list | tee /etc/apt/sources.list.d/microsoft.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends \
+    powershell \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -rf /etc/apt/sources.list.d/*
 
-# # Instally PyPy2
-# RUN wget -q -P /tmp https://bitbucket.org/pypy/pypy/downloads/pypy2-v6.0.0-linux64.tar.bz2 \
-#  && tar -x -C /opt -f /tmp/pypy2-v6.0.0-linux64.tar.bz2 \
-#  && rm /tmp/pypy2-v6.0.0-linux64.tar.bz2 \
-#  && mv /opt/pypy2-v6.0.0-linux64 /opt/pypy2 \
-#  && ln -s /opt/pypy2/bin/pypy /usr/local/bin/pypy
+# Instally PyPy2
+RUN wget -q -P /tmp https://bitbucket.org/pypy/pypy/downloads/pypy2-v6.0.0-linux64.tar.bz2 \
+ && tar -x -C /opt -f /tmp/pypy2-v6.0.0-linux64.tar.bz2 \
+ && rm /tmp/pypy2-v6.0.0-linux64.tar.bz2 \
+ && mv /opt/pypy2-v6.0.0-linux64 /opt/pypy2 \
+ && ln -s /opt/pypy2/bin/pypy /usr/local/bin/pypy
 
-# # Install PyPy3
-# RUN wget -q -P /tmp https://bitbucket.org/pypy/pypy/downloads/pypy3-v6.0.0-linux64.tar.bz2 \
-#  && tar -x -C /opt -f /tmp/pypy3-v6.0.0-linux64.tar.bz2 \
-#  && rm /tmp/pypy3-v6.0.0-linux64.tar.bz2 \
-#  && mv /opt/pypy3-v6.0.0-linux64 /opt/pypy3 \
-#  && ln -s /opt/pypy3/bin/pypy3 /usr/local/bin/pypy3
+# Install PyPy3
+RUN wget -q -P /tmp https://bitbucket.org/pypy/pypy/downloads/pypy3-v6.0.0-linux64.tar.bz2 \
+ && tar -x -C /opt -f /tmp/pypy3-v6.0.0-linux64.tar.bz2 \
+ && rm /tmp/pypy3-v6.0.0-linux64.tar.bz2 \
+ && mv /opt/pypy3-v6.0.0-linux64 /opt/pypy3 \
+ && ln -s /opt/pypy3/bin/pypy3 /usr/local/bin/pypy3
 
-# # Install Python
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends \
-#     python \
-#     python-pip \
-#     python3 \
-#     python3-pip \
-#  && rm -rf /var/lib/apt/lists/*
+# Install Python
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    python \
+    python-pip \
+    python3 \
+    python3-pip \
+ && rm -rf /var/lib/apt/lists/*
 
-# # Install rebar3 (for Erlang)
-# RUN wget -q -O rebar3 https://s3.amazonaws.com/rebar3/rebar3 \
-#  && chmod +x rebar3 \
-#  && mv rebar3 /usr/local/bin/rebar3
+# Install rebar3 (for Erlang)
+RUN wget -q -O rebar3 https://s3.amazonaws.com/rebar3/rebar3 \
+ && chmod +x rebar3 \
+ && mv rebar3 /usr/local/bin/rebar3
 
-# # Install Ruby requirements
-# RUN apt-get update \
-#  && apt-get install -y libz-dev openssl libssl-dev \
-#  && rm -rf /var/lib/apt/lists/*
+# Install Ruby requirements
+RUN apt-get update \
+ && apt-get install -y libz-dev openssl libssl-dev \
+ && rm -rf /var/lib/apt/lists/*
 
 # Install Scala build tools
 RUN curl -s https://raw.githubusercontent.com/paulp/sbt-extras/master/sbt > /usr/local/bin/sbt \
  && chmod 0755 /usr/local/bin/sbt
 
-# # Install Sphinx
-# RUN [ "xenial" = "xenial" ] \
-#   && apt-get update \
-#   && apt-get install -y sphinxsearch \
-#   && rm -rf /var/lib/apt/lists/* \
-#   || echo -n
+# Install Sphinx
+RUN [ "xenial" = "xenial" ] \
+  && apt-get update \
+  && apt-get install -y sphinxsearch \
+  && rm -rf /var/lib/apt/lists/* \
+  || echo -n
 
-# # Install Subversion
-# RUN apt-get update \
-#  && apt-get install -y --no-install-recommends subversion \
-#  && rm -rf /var/lib/apt/lists/*
-# ENV svn=/usr/bin/svn
+# Install Subversion
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends subversion \
+ && rm -rf /var/lib/apt/lists/*
+ENV svn=/usr/bin/svn
 
 # Install Terraform
 RUN TERRAFORM_VERSION=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/terraform | jq -r .current_version) \
@@ -549,10 +549,10 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && rm -rf /var/lib/apt/lists/* \
  && rm -rf /etc/apt/sources.list.d/*
 
-# # Install Xvfb
-# RUN apt-get update \
-#  && apt-get install -y xvfb \
-#  && rm -rf /var/lib/apt/lists/*
+# Install Xvfb
+RUN apt-get update \
+ && apt-get install -y xvfb \
+ && rm -rf /var/lib/apt/lists/*
 
 # Download hosted tool cache
 ENV AGENT_TOOLSDIRECTORY=/opt/hostedtoolcache
@@ -569,7 +569,7 @@ RUN original_directory=$PWD \
     done;
 
 # Add the latest Ruby version in the tool cache to the path
-# ENV PATH $PATH:/opt/hostedtoolcache/Ruby/2.5.1/x64/bin
+ENV PATH $PATH:/opt/hostedtoolcache/Ruby/2.5.1/x64/bin
 
 # Clean system
 RUN apt-get clean \
