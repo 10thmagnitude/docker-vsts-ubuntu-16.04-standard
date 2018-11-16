@@ -101,7 +101,8 @@ RUN curl -sL https://dl.google.com/go/go1.10.linux-amd64.tar.gz -o go1.10.linux-
 ENV GOROOT_1_9_X64=/usr/local/go1.9.4 \
     GOROOT_1_10_X64=/usr/local/go1.10 \
     GOROOT=/usr/local/go1.10
-ENV PATH $PATH:$GOROOT/bin
+ENV GOPATH=$HOME/go
+ENV PATH $PATH:$GOROOT/bin:$HOME/go/bin
 
 # Install Google Chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
@@ -533,6 +534,9 @@ RUN TERRAFORM_VERSION=$(curl -s https://checkpoint-api.hashicorp.com/v1/check/te
  && curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \
  && unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin \
  && rm -f terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+# Install Terraform-Docs
+RUN go get github.com/segmentio/terraform-docs
 
 # XSLT transformation
 RUN apt-get update \
